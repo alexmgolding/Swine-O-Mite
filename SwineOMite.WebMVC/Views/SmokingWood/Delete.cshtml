@@ -1,0 +1,48 @@
+﻿@model SwineOMite.Models.SmookingWood.SmokingWoodDetail
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>SmokingWoodDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.WoodId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WoodId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WoodSpecies)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WoodSpecies)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WoodVariety)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WoodVariety)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

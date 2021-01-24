@@ -1,0 +1,42 @@
+﻿@model SwineOMite.Models.IngredientQuantities.IngredientQuantityDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>IngredientQuantityDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.QuantityId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuantityId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IngredentAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IngredentAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MeasurementUnit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MeasurementUnit)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.QuantityId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

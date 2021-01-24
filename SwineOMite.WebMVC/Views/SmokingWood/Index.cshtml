@@ -1,0 +1,44 @@
+﻿@model IEnumerable<SwineOMite.Models.SmookingWood.SmokingWoodListItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.WoodId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WoodSpecies)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WoodVariety)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.WoodId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WoodSpecies)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WoodVariety)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.WoodId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.WoodId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.WoodId })
+        </td>
+    </tr>
+}
+
+</table>

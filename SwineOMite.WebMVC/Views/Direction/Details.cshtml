@@ -1,0 +1,50 @@
+﻿@model SwineOMite.Models.Directions.DirectionDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DirectionDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DirectionId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DirectionId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RecipeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecipeId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StepNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StepNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Instructions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Instructions)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DirectionId}) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

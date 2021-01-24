@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SwineOMite.Models.Directions.DirectionListItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DirectionId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RecipeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StepNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Instructions)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DirectionId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RecipeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StepNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Instructions)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DirectionId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.DirectionId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.DirectionId })
+        </td>
+    </tr>
+}
+
+</table>
