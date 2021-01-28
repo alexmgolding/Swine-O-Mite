@@ -3,7 +3,7 @@ namespace SwineOMite.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class databaseCleanup : DbMigration
+    public partial class projectCleanup : DbMigration
     {
         public override void Up()
         {
@@ -60,8 +60,11 @@ namespace SwineOMite.Data.Migrations
                         DirectionId = c.Int(nullable: false, identity: true),
                         StepNumber = c.Int(nullable: false),
                         Instructions = c.String(nullable: false),
+                        Recipe_RecipeId = c.Int(),
                     })
-                .PrimaryKey(t => t.DirectionId);
+                .PrimaryKey(t => t.DirectionId)
+                .ForeignKey("dbo.Recipe", t => t.Recipe_RecipeId)
+                .Index(t => t.Recipe_RecipeId);
             
             CreateTable(
                 "dbo.SmokingWoodQuantity",
@@ -70,15 +73,12 @@ namespace SwineOMite.Data.Migrations
                         SmokingWoodQuantityId = c.Int(nullable: false, identity: true),
                         WoodQuantityId = c.Int(nullable: false),
                         SmokingWoodId = c.Int(nullable: false),
-                        RecipeId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.SmokingWoodQuantityId)
                 .ForeignKey("dbo.SmokingWood", t => t.SmokingWoodId, cascadeDelete: true)
                 .ForeignKey("dbo.WoodQuantity", t => t.WoodQuantityId, cascadeDelete: true)
-                .ForeignKey("dbo.Recipe", t => t.RecipeId, cascadeDelete: true)
                 .Index(t => t.WoodQuantityId)
-                .Index(t => t.SmokingWoodId)
-                .Index(t => t.RecipeId);
+                .Index(t => t.SmokingWoodId);
             
             CreateTable(
                 "dbo.SmokingWood",
@@ -173,26 +173,26 @@ namespace SwineOMite.Data.Migrations
                 "dbo.RecipeCompleteIngredient",
                 c => new
                     {
-                        Recipe_RecipeId = c.Int(nullable: false),
-                        CompleteIngredient_CompleteIngredientId = c.Int(nullable: false),
+                        Recipe = c.Int(nullable: false),
+                        CompleteIngredient = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.Recipe_RecipeId, t.CompleteIngredient_CompleteIngredientId })
-                .ForeignKey("dbo.Recipe", t => t.Recipe_RecipeId, cascadeDelete: true)
-                .ForeignKey("dbo.CompleteIngredient", t => t.CompleteIngredient_CompleteIngredientId, cascadeDelete: true)
-                .Index(t => t.Recipe_RecipeId)
-                .Index(t => t.CompleteIngredient_CompleteIngredientId);
+                .PrimaryKey(t => new { t.Recipe, t.CompleteIngredient })
+                .ForeignKey("dbo.Recipe", t => t.Recipe, cascadeDelete: true)
+                .ForeignKey("dbo.CompleteIngredient", t => t.CompleteIngredient, cascadeDelete: true)
+                .Index(t => t.Recipe)
+                .Index(t => t.CompleteIngredient);
             
             CreateTable(
-                "dbo.DirectionRecipe",
+                "dbo.SmokingWoodQuantityRecipe",
                 c => new
                     {
-                        Direction_DirectionId = c.Int(nullable: false),
+                        SmokingWoodQuantity_SmokingWoodQuantityId = c.Int(nullable: false),
                         Recipe_RecipeId = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.Direction_DirectionId, t.Recipe_RecipeId })
-                .ForeignKey("dbo.Direction", t => t.Direction_DirectionId, cascadeDelete: true)
+                .PrimaryKey(t => new { t.SmokingWoodQuantity_SmokingWoodQuantityId, t.Recipe_RecipeId })
+                .ForeignKey("dbo.SmokingWoodQuantity", t => t.SmokingWoodQuantity_SmokingWoodQuantityId, cascadeDelete: true)
                 .ForeignKey("dbo.Recipe", t => t.Recipe_RecipeId, cascadeDelete: true)
-                .Index(t => t.Direction_DirectionId)
+                .Index(t => t.SmokingWoodQuantity_SmokingWoodQuantityId)
                 .Index(t => t.Recipe_RecipeId);
             
         }
@@ -203,29 +203,29 @@ namespace SwineOMite.Data.Migrations
             DropForeignKey("dbo.IdentityUserLogin", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.IdentityUserClaim", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.IdentityUserRole", "IdentityRole_Id", "dbo.IdentityRole");
-            DropForeignKey("dbo.SmokingWoodQuantity", "RecipeId", "dbo.Recipe");
             DropForeignKey("dbo.SmokingWoodQuantity", "WoodQuantityId", "dbo.WoodQuantity");
             DropForeignKey("dbo.SmokingWoodQuantity", "SmokingWoodId", "dbo.SmokingWood");
-            DropForeignKey("dbo.DirectionRecipe", "Recipe_RecipeId", "dbo.Recipe");
-            DropForeignKey("dbo.DirectionRecipe", "Direction_DirectionId", "dbo.Direction");
-            DropForeignKey("dbo.RecipeCompleteIngredient", "CompleteIngredient_CompleteIngredientId", "dbo.CompleteIngredient");
-            DropForeignKey("dbo.RecipeCompleteIngredient", "Recipe_RecipeId", "dbo.Recipe");
+            DropForeignKey("dbo.SmokingWoodQuantityRecipe", "Recipe_RecipeId", "dbo.Recipe");
+            DropForeignKey("dbo.SmokingWoodQuantityRecipe", "SmokingWoodQuantity_SmokingWoodQuantityId", "dbo.SmokingWoodQuantity");
+            DropForeignKey("dbo.Direction", "Recipe_RecipeId", "dbo.Recipe");
+            DropForeignKey("dbo.RecipeCompleteIngredient", "CompleteIngredient", "dbo.CompleteIngredient");
+            DropForeignKey("dbo.RecipeCompleteIngredient", "Recipe", "dbo.Recipe");
             DropForeignKey("dbo.CompleteIngredient", "QuantityId", "dbo.IngredientQuantity");
             DropForeignKey("dbo.CompleteIngredient", "IngredientId", "dbo.Ingredient");
-            DropIndex("dbo.DirectionRecipe", new[] { "Recipe_RecipeId" });
-            DropIndex("dbo.DirectionRecipe", new[] { "Direction_DirectionId" });
-            DropIndex("dbo.RecipeCompleteIngredient", new[] { "CompleteIngredient_CompleteIngredientId" });
-            DropIndex("dbo.RecipeCompleteIngredient", new[] { "Recipe_RecipeId" });
+            DropIndex("dbo.SmokingWoodQuantityRecipe", new[] { "Recipe_RecipeId" });
+            DropIndex("dbo.SmokingWoodQuantityRecipe", new[] { "SmokingWoodQuantity_SmokingWoodQuantityId" });
+            DropIndex("dbo.RecipeCompleteIngredient", new[] { "CompleteIngredient" });
+            DropIndex("dbo.RecipeCompleteIngredient", new[] { "Recipe" });
             DropIndex("dbo.IdentityUserLogin", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserClaim", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserRole", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserRole", new[] { "IdentityRole_Id" });
-            DropIndex("dbo.SmokingWoodQuantity", new[] { "RecipeId" });
             DropIndex("dbo.SmokingWoodQuantity", new[] { "SmokingWoodId" });
             DropIndex("dbo.SmokingWoodQuantity", new[] { "WoodQuantityId" });
+            DropIndex("dbo.Direction", new[] { "Recipe_RecipeId" });
             DropIndex("dbo.CompleteIngredient", new[] { "QuantityId" });
             DropIndex("dbo.CompleteIngredient", new[] { "IngredientId" });
-            DropTable("dbo.DirectionRecipe");
+            DropTable("dbo.SmokingWoodQuantityRecipe");
             DropTable("dbo.RecipeCompleteIngredient");
             DropTable("dbo.IdentityUserLogin");
             DropTable("dbo.IdentityUserClaim");

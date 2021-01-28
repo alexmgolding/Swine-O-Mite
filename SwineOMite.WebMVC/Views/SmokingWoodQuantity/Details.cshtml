@@ -1,0 +1,42 @@
+﻿@model SwineOMite.Models.SmokingWoodQuantity.SmokingWoodQuantityDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SmokingWoodQuantityDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SmokingWoodQuantityId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SmokingWoodQuantityId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SmokingWoodId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SmokingWoodId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WoodQuantityId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WoodQuantityId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.SmokingWoodQuantityId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

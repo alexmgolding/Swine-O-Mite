@@ -1,5 +1,5 @@
-﻿using SwineOMite.Models.SmokingWoodQuantity;
-using SwineOMite.Models.SmookingWoodQuantity;
+﻿using SwineOMite.Data;
+using SwineOMite.Models.SmokingWoodQuantity;
 using SwineOMite.Services;
 using System;
 using System.Collections.Generic;
@@ -25,7 +25,15 @@ namespace SwineOMite.WebMVC.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            var model = new SmokingWoodQuantityCreate();
+            model.WoodQuantity = new WoodQuantityService().GetWoodQuantityDropdown();
+
+            model.SmokingWood = new SmokingWoodService().GetSmokingWoodDropdown();
+            //// model.NameofList = run service method 
+            ///do same for smokingwood property
+            //service. = 
+            
+            return View(model);
         }
 
         [HttpPost]
@@ -56,12 +64,6 @@ namespace SwineOMite.WebMVC.Controllers
             var model = svc.GetSmokingWoodQuantityById(id);
 
             return View(model);
-        }
-
-        private SmokingWoodQuantityService CreateSmokingWoodQuantityService()
-        {
-            var service = new SmokingWoodQuantityService();
-            return service;
         }
 
         public ActionResult Edit(int id)
@@ -119,6 +121,12 @@ namespace SwineOMite.WebMVC.Controllers
             service.DeleteSmokingWoodQuantity(id);
             TempData["SaveResult"] = "Your smoking wood quantity was removed.";
             return RedirectToAction("Index");
+        }
+
+        private SmokingWoodQuantityService CreateSmokingWoodQuantityService()
+        {
+            var service = new SmokingWoodQuantityService();
+            return service;
         }
     }
 }

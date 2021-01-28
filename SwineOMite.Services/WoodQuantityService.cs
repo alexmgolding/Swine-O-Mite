@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace SwineOMite.Services
 {
@@ -31,6 +32,23 @@ namespace SwineOMite.Services
             }
         }
 
+        public IEnumerable<SelectListItem> GetWoodQuantityDropdown()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query = ctx
+                    .WoodQuantities
+                    .Select(
+                    e => new SelectListItem
+                    {
+                        Value = e.WoodQuantityId.ToString(),
+                        Text = e.WoodAmount.ToString()
+                    }
+                    );
+
+                return query.ToArray();
+            }
+        }
         public IEnumerable<WoodQuantityListItem> GetWoodQuantity()
         {
             using (var ctx = new ApplicationDbContext())

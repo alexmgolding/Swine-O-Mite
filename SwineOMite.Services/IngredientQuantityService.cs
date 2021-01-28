@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace SwineOMite.Services
 {
@@ -28,6 +29,24 @@ namespace SwineOMite.Services
             {
                 ctx.IngredientQuantities.Add(entity);
                 return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public IEnumerable<SelectListItem> GetIngredientQuantityDropdown()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query = ctx
+                    .IngredientQuantities
+                    .Select(
+                    e => new SelectListItem
+                    {
+                        Value = e.QuantityId.ToString(),
+                        Text = e.IngredientAmount.ToString() + e.MeasurementUnit.ToString()
+                    }
+                    ); ;
+
+                return query.ToArray();
             }
         }
 

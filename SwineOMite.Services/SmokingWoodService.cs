@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace SwineOMite.Services
 {
@@ -28,6 +29,24 @@ namespace SwineOMite.Services
             {
                 ctx.SmokingWoods.Add(entity);
                 return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public IEnumerable<SelectListItem> GetSmokingWoodDropdown()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query = ctx
+                    .SmokingWoods
+                    .Select(
+                    e => new SelectListItem
+                    {
+                        Value = e.SmokingWoodId.ToString(),
+                        Text = e.WoodSpecies.ToString() + e.WoodVariety.ToString()
+                    }
+                    ); ;
+
+                return query.ToArray();
             }
         }
 

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SwineOMite.Models.SmookingWoodQuantity
+namespace SwineOMite.Models.SmokingWoodQuantity
 {
     public class SmokingWoodQuantityDetail
     {

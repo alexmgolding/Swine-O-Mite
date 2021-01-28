@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.WoodId)
+            @Html.DisplayNameFor(model => model.SmokingWoodId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.WoodSpecies)
@@ -25,7 +25,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.WoodId)
+            @Html.DisplayFor(modelItem => item.SmokingWoodId)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.WoodSpecies)
@@ -34,9 +34,9 @@
             @Html.DisplayFor(modelItem => item.WoodVariety)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.WoodId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.WoodId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.WoodId })
+            @Html.ActionLink("Edit", "Edit", new { id=item.SmokingWoodId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.SmokingWoodId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.SmokingWoodId })
         </td>
     </tr>
 }

@@ -24,7 +24,12 @@ namespace SwineOMite.WebMVC.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            var model = new CompleteIngredientCreate();
+            model.Ingredient = new IngredientService().GetIngredientDropdown();
+
+            model.IngredientQuantity = new IngredientQuantityService().GetIngredientQuantityDropdown();
+
+            return View(model);
         }
 
         [HttpPost]

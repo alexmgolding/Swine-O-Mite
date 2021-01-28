@@ -12,13 +12,16 @@ namespace SwineOMite.Data.Entities
     {
         [Key]
         public int SmokingWoodQuantityId { get; set; }
+
         [ForeignKey(nameof (WoodQuantity))]
         public int WoodQuantityId { get; set; }
         public virtual WoodQuantity WoodQuantity { get; set; }
+
         [ForeignKey(nameof (SmokingWood))]
         public int SmokingWoodId { get; set; }
         public virtual SmokingWood SmokingWood { get; set; }
-        public int RecipeId { get; set; }
+
+        public virtual ICollection<Recipe> Recipes { get; set; }
 
     }
 }

@@ -180,6 +180,7 @@
     <Compile Include="Controllers\IngredientController.cs" />
     <Compile Include="Controllers\IngredientQuantityController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RecipeController.cs" />
     <Compile Include="Controllers\SmokingWoodController.cs" />
     <Compile Include="Controllers\SmokingWoodQuantityController.cs" />
     <Compile Include="Controllers\WoodQuantityController.cs" />
@@ -272,11 +273,20 @@
     <Content Include="Views\WoodQuantity\Edit.cshtml" />
     <Content Include="Views\WoodQuantity\Delete.cshtml" />
     <Content Include="Views\SmokingWood\Create.cshtml" />
+    <Content Include="Views\SmokingWoodQuantity\Index.cshtml" />
+    <Content Include="Views\SmokingWoodQuantity\Create.cshtml" />
+    <Content Include="Views\SmokingWoodQuantity\Details.cshtml" />
+    <Content Include="Views\SmokingWoodQuantity\Edit.cshtml" />
+    <Content Include="Views\SmokingWoodQuantity\Delete.cshtml" />
+    <Content Include="Views\CompleteIngredient\Index.cshtml" />
+    <Content Include="Views\CompleteIngredient\Create.cshtml" />
+    <Content Include="Views\CompleteIngredient\Details.cshtml" />
+    <Content Include="Views\CompleteIngredient\Edit.cshtml" />
+    <Content Include="Views\CompleteIngredient\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\CompleteIngredient\" />
-    <Folder Include="Views\SmokingWoodQuantity\" />
+    <Folder Include="Views\Recipe\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

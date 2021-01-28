@@ -12,12 +12,15 @@ namespace SwineOMite.Data.Entities
     {
         [Key]
         public int CompleteIngredientId { get; set; }
+
         [ForeignKey(nameof (Ingredient))]
         public int IngredientId { get; set; }
         public virtual Ingredient Ingredient { get; set; }
+
         [ForeignKey(nameof (IngredientQuantity))]
         public int QuantityId { get; set; }
         public virtual IngredientQuantity IngredientQuantity { get; set; }
+
         public virtual ICollection<Recipe> Recipes { get; set; }
     }
 }

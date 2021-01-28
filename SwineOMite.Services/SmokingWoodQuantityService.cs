@@ -1,7 +1,6 @@
 ﻿using SwineOMite.Data;
 using SwineOMite.Data.Entities;
 using SwineOMite.Models.SmokingWoodQuantity;
-using SwineOMite.Models.SmookingWoodQuantity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +31,20 @@ namespace SwineOMite.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+
+        //public bool CreateSmokingWoodQuanity(SmokingWoodQuantityCreate model)
+        //{
+        //    using (var ctx = new ApplicationDbContext())
+        //    {
+        //        var smokingWoodItem = ctx.SmokingWoodQuantities.Select(s => new
+        //        {
+        //            WoodQuantity = s.WoodQuantityId,
+        //            SmokingWood = s.SmokingWoodId
+        //        }).ToList();
+        //        ctx.SmokingWoodQuantities.Add(smokingWoodItem);
+        //        return ctx.SaveChanges() == 1;
+        //    }
+        //}
 
         public IEnumerable<SmokingWoodQuantityListItem> GetSmokingWoodQauntities()
         {

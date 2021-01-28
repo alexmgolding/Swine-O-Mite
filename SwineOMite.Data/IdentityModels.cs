@@ -55,6 +55,17 @@ namespace SwineOMite.Data
                 .Add(new IdentityUserLoginConfiguration())
                 .Add(new IdentityUserRoleConfiguration());
 
+            modelBuilder
+                .Entity<Recipe>()
+                .HasMany<CompleteIngredient>(r => r.CompleteIngredients)
+                .WithMany(c => c.Recipes)
+                .Map(cr =>
+                {
+                    cr.MapLeftKey("Recipe");
+                    cr.MapRightKey("CompleteIngredient");
+                    cr.ToTable("RecipeCompleteIngredient");
+                });
+
             //modelBuilder
                 //.Entity<SmokingWoodQuantity>()
                 //.HasRequired(r => r.SmokingWood)

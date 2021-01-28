@@ -4,8 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
-namespace SwineOMite.Models.SmookingWoodQuantity
+namespace SwineOMite.Models.SmokingWoodQuantity
 {
     public class SmokingWoodQuantityCreate
     {
@@ -13,7 +14,9 @@ namespace SwineOMite.Models.SmookingWoodQuantity
         public int SmokingWoodQuantityId { get; set; }
         [Key]
         public int SmokingWoodId { get; set; }
+        public IEnumerable<SelectListItem> SmokingWood { get; set; }
         [Key]
         public int WoodQuantityId { get; set; }
+        public IEnumerable<SelectListItem> WoodQuantity { get; set; }   
     }
 }

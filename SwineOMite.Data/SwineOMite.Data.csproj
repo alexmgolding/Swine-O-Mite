@@ -62,9 +62,9 @@
     <Compile Include="Entities\SmokingWoodQuantity.cs" />
     <Compile Include="Entities\WoodQuantity.cs" />
     <Compile Include="IdentityModels.cs" />
-    <Compile Include="Migrations\202101242113258_databaseCleanup.cs" />
-    <Compile Include="Migrations\202101242113258_databaseCleanup.Designer.cs">
-      <DependentUpon>202101242113258_databaseCleanup.cs</DependentUpon>
+    <Compile Include="Migrations\202101270415252_projectCleanup.cs" />
+    <Compile Include="Migrations\202101270415252_projectCleanup.Designer.cs">
+      <DependentUpon>202101270415252_projectCleanup.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,8 +75,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202101242113258_databaseCleanup.resx">
-      <DependentUpon>202101242113258_databaseCleanup.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202101270415252_projectCleanup.resx">
+      <DependentUpon>202101270415252_projectCleanup.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

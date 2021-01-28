@@ -7,13 +7,13 @@ namespace SwineOMite.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class databaseCleanup : IMigrationMetadata
+    public sealed partial class projectCleanup : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(databaseCleanup));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(projectCleanup));
         
         string IMigrationMetadata.Id
         {
-            get { return "202101242113258_databaseCleanup"; }
+            get { return "202101270415252_projectCleanup"; }
         }
         
         string IMigrationMetadata.Source
