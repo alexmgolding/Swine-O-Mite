@@ -2,6 +2,17 @@
     ViewBag.Title = "About";
 }
 <h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<div>
+    <div>
+        <img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=2538&q=80" class="img-thumbnail" alt="Smoked Ribs" width="300">
+        <img src="https://images.unsplash.com/photo-1508615263227-c5d58c1e5821?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=750&q=80" class="img-thumbnail" alt="Grilled Pork-Chops" width="300">
+        <img src="https://images.unsplash.com/photo-1505976231433-d7ebe8382bb5?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=2400&q=80" class="img-thumbnail" alt="Grilled Pork-Chops" width="275">
+    </div>
+    <div>
+        <h4 class="card-title">About Swine-O-Mite</h4>
+        <p style="font-size:medium">We're a dedicated team of BBQ enthusists that want to make the experiences of creating delicious meals a shared expience with everyone. This is why we developed our app, to share our recipes with our community. This app will allow you to store your favorite recipes and store them in one centralized location.</p>
+        <p style="font-size:medium">If you'd like to get started please click the button below to register an account to get started.</p>
+        <p><a class="btn btn-default" @Html.ActionLink("Register", "Register", "Account")</a></p>
+    </div>
+</div>

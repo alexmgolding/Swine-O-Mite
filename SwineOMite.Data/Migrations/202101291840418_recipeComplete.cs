@@ -3,7 +3,7 @@ namespace SwineOMite.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class projectCleanup : DbMigration
+    public partial class recipeComplete : DbMigration
     {
         public override void Up()
         {
@@ -48,7 +48,6 @@ namespace SwineOMite.Data.Migrations
                     {
                         RecipeId = c.Int(nullable: false, identity: true),
                         RecipeOwner = c.Guid(nullable: false),
-                        DateCreated = c.DateTime(nullable: false),
                         RecipeTitle = c.String(),
                     })
                 .PrimaryKey(t => t.RecipeId);

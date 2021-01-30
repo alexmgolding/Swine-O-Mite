@@ -1,0 +1,53 @@
+﻿@model IEnumerable<SwineOMite.Models.Recipe.RecipeListItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Recipes</h2>
+<div>
+
+    <p style="color: black">
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RecipeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecipeTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompleteIngredient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Direction)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RecipeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RecipeTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompleteIngredient)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Direction)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.RecipeId, Style = "text-decorator:None" }) |
+            @Html.ActionLink("Details", "Details", new { id = item.RecipeId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.RecipeId })
+        </td>
+    </tr>
+    }
+
+    </table>
+</div>

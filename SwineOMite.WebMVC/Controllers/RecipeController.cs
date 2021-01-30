@@ -1,4 +1,5 @@
-﻿using SwineOMite.Models.Recipe;
+﻿using Microsoft.AspNet.Identity;
+using SwineOMite.Models.Recipe;
 using SwineOMite.Services;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace SwineOMite.WebMVC.Controllers
 {
+    [Authorize]
     public class RecipeController : Controller
     {
         // GET: Recipe
@@ -23,7 +25,12 @@ namespace SwineOMite.WebMVC.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            var model = new RecipeCreate();
+
+            model.CompleteIngredientList = new RecipeService().GetIngredientDropdown();
+
+            model.SmokingWoodQuantityList = new RecipeService().GetSmokingWoodQuantityDropdown();
+            return View(model);
         }
 
         [HttpPost]
@@ -56,12 +63,6 @@ namespace SwineOMite.WebMVC.Controllers
             return View(model);
         }
 
-        private RecipeService CreateRecipeService()
-        {
-            var service = new RecipeService();
-            return service;
-        }
-
         public ActionResult Edit(int id)
         {
             var service = CreateRecipeService();
@@ -70,7 +71,7 @@ namespace SwineOMite.WebMVC.Controllers
             {
                 RecipeId = detail.RecipeId,
                 RecipeTitle = detail.RecipeTitle,
-                DateCreated = detail.DateCreated,
+                //DateCreated = detail.DateCreated,
                 CompleteIngredients = detail.CompleteIngredients,
                 SmokingWoodQuantities = detail.SmokingWoodQuantities,
                 DirectionId = detail.DirectionId
@@ -120,6 +121,13 @@ namespace SwineOMite.WebMVC.Controllers
             service.DeleteRecipe(id);
             TempData["SaveResult"] = "Your recipe was removed.";
             return RedirectToAction("Index");
+        }
+
+          private RecipeService CreateRecipeService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new RecipeService();
+            return service;
         }
     }
 }

@@ -6,32 +6,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace SwineOMite.Services
 {
     public class RecipeService
     {
+        private readonly Guid _userId;
         public RecipeService()
         {
-
+            
         }
 
         public bool CreateRecipe(RecipeCreate model)
-        {
-            return true;
+        {            
             var entity = new Recipe()
             {
-                RecipeOwner = model.RecipeOwner,
+                RecipeOwner = _userId,
                 RecipeTitle = model.RecipeTitle,
-                DateCreated = model.DateCreated
+                //DateCreated = model.DateCreated
                 //CompleteIngredients = model.CompleteIngredients,
                 //SmokingWoodQuantities = model.SmokingWoodQuantities,
                 //DirectionId = model.DirectionId
             };
 
             var directionSteps = model.DirectionSteps.Split(',');
-            var smokingWood = model.SmokingWood;
-            var fullIngredient = model.FullIngredient;
+            var smokingWoodQuantity = model.SmokingWoodQuantityList;
+            var completeIngredients = model.CompleteIngredientList;
             int loopCounter = 1;
 
             using (var ctx = new ApplicationDbContext())
@@ -47,28 +48,56 @@ namespace SwineOMite.Services
                     });
                     loopCounter++;
                 }
-                //foreach (string fullIngredient in fullIngredient)
-                {
-                    // for every id they pick need to find the entity related to that entity (var needs to be inside foreach loop)
-                    // if statement != null
-                    // add to ICollection
-                    //    entity.CompleteIngredients.Add(new CompleteIngredient
-                    //    {
-                    //        Ingredient = fullIngredient,
-                    //        IngredientQuantity = IngredientQuantity
-                    //    });
-                    //}
 
-                    //foreach (int smokingWood in smokingWood)
-                    //{
-                    //    entity.SmokingWoodQuantities.Add(new SmokingWoodQuantity
-                    //    {
-                    //        WoodQuantityId = smokingWood,
+            }
+            return true; 
+        }
 
-                    //    });
-                    //}
+        public MultiSelectList GetIngredientDropdown()
+        {
+            //var entity = new Recipe() { };
+            //int loopCounter = 1;
 
-                }
+            using (var ctx = new ApplicationDbContext())
+            {
+                
+                var query = ctx
+                    .CompleteIngredients
+                    .Select(
+                    ci => new
+                    {
+                        Value = ci.CompleteIngredientId,
+                        Text = ci.Ingredient.IngredientName + ci.IngredientQuantity.IngredientAmount.ToString() + ci.IngredientQuantity.MeasurementUnit.ToString()
+                    });
+
+                //foreach (string ingredient in )
+                //{
+                //    var ingredientAmount = ctx.CompleteIngredients.Find()
+                //        ions.Add(new Recipe
+                //    {
+                //        CompleteIngredients = 
+                //        Instructions = directionStep
+                //    });
+                //    loopCounter++;
+                //}
+                return new MultiSelectList(query.ToArray(), "Value", "Text");
+            }
+        }
+
+        public MultiSelectList GetSmokingWoodQuantityDropdown()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query = ctx
+                    .SmokingWoodQuantities
+                    .Select(
+                    s => new
+                    {
+                        Value = s.SmokingWoodQuantityId,
+                        Text = s.SmokingWood.WoodSpecies.ToString() + s.SmokingWood.WoodVariety.ToString() + s.WoodQuantity.WoodAmount.ToString()
+                    });
+
+                return new MultiSelectList(query.ToArray(), "Value", "Text");
             }
         }
         public IEnumerable<RecipeListItem> GetRecipes()
@@ -77,16 +106,16 @@ namespace SwineOMite.Services
             {
                 var query = ctx
                     .Recipes
-                    //.Where(e => e.IngredientId = ingredientId)
+                    .Where(e => e.RecipeOwner == _userId)
                     .Select(
                     e => new RecipeListItem
                     {
                         RecipeId = e.RecipeId,
                         RecipeTitle = e.RecipeTitle,
-                        DateCreated = e.DateCreated,
-                        CompleteIngredients = e.CompleteIngredients,
-                        SmokingWoodQuantities = e.SmokingWoodQuantities,
-                        DirectionId = 0 //e.DirectionId
+                        //DateCreated = e.DateCreated,
+                        //CompleteIngredients = e.CompleteIngredients,
+                        //SmokingWoodQuantities = e.SmokingWoodQuantities,
+                        //DirectionId = 0 //e.DirectionId
                     }
                     );
 
@@ -100,13 +129,13 @@ namespace SwineOMite.Services
             {
                 var entity = ctx
                     .Recipes
-                    .Single(e => e.RecipeId == id);
+                    .Single(e => e.RecipeId == id && e.RecipeOwner == _userId);
                 return
                     new RecipeDetail
                     {
                         RecipeId = entity.RecipeId,
                         RecipeTitle = entity.RecipeTitle,
-                        DateCreated = entity.DateCreated,
+                        //DateCreated = entity.DateCreated,
                         CompleteIngredients = entity.CompleteIngredients,
                         SmokingWoodQuantities = entity.SmokingWoodQuantities,
                         DirectionId = 0 //entity.DirectionId
@@ -120,7 +149,7 @@ namespace SwineOMite.Services
             {
                 var entity = ctx
                     .Recipes
-                    .Single(e => e.RecipeId == model.RecipeId);
+                    .Single(e => e.RecipeId == model.RecipeId && e.RecipeOwner == _userId);
 
                 entity.RecipeTitle = model.RecipeTitle;
                 entity.CompleteIngredients = model.CompleteIngredients;

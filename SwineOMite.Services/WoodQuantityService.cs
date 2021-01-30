@@ -49,6 +49,9 @@ namespace SwineOMite.Services
                 return query.ToArray();
             }
         }
+
+        
+
         public IEnumerable<WoodQuantityListItem> GetWoodQuantity()
         {
             using (var ctx = new ApplicationDbContext())

@@ -16,5 +16,7 @@ namespace SwineOMite.Data.Entities
         public int StepNumber { get; set; }
         [Required]
         public string Instructions { get; set; }
+
+        //public virtual ICollection<Recipe> Recipes { get; set; }
     }
 }
